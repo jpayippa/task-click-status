@@ -44,4 +44,6 @@ Joel Payippara Shibu ([github.com/jpayippa](https://github.com/jpayippa))
 
 ## License
 
-[MIT](LICENSE)
+[GPLv3](LICENSE) or later. You're free to copy, modify, and redistribute this (including
+commercially), as long as any distributed copy or modified version is also licensed under
+the GPL and comes with its source code.
