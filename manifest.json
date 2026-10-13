@@ -1,0 +1,10 @@
+{
+  "id": "task-click-status",
+  "name": "Task Click Status",
+  "version": "1.1.0",
+  "minAppVersion": "1.5.0",
+  "description": "Click to complete, double-click to cancel, or right-click for in-progress, deferred, and other task statuses.",
+  "author": "Joel Payippara Shibu",
+  "authorUrl": "https://github.com/jpayippa",
+  "isDesktopOnly": false
+}

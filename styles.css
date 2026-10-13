@@ -1,0 +1,124 @@
+/* Task Click Status: done (green), in progress (yellow), deferred (blue), cancelled (red cross). */
+body {
+  --checklist-done-decoration: none;
+  --checklist-done-color: var(--text-normal);
+}
+
+:is(.markdown-preview-view, .markdown-rendered) li.task-list-item[data-task="x"],
+:is(.markdown-preview-view, .markdown-rendered) li.task-list-item[data-task="X"],
+.markdown-source-view .HyperMD-task-line:is([data-task="x"], [data-task="X"]) {
+  background-color: rgba(46, 180, 90, 0.18) !important;
+  border-radius: 4px;
+  text-decoration: none !important;
+  color: var(--text-normal) !important;
+}
+
+.markdown-source-view .HyperMD-task-line:is([data-task="x"], [data-task="X"]) .cm-strikethrough,
+li.task-list-item:is([data-task="x"], [data-task="X"]) > .task-list-item-text {
+  text-decoration: none !important;
+  color: var(--text-normal) !important;
+}
+
+:is(.task-list-item[data-task="x"], .task-list-item[data-task="X"],
+    .HyperMD-task-line[data-task="x"], .HyperMD-task-line[data-task="X"]) > input[type="checkbox"],
+input[type="checkbox"]:is([data-task="x"], [data-task="X"]) {
+  background-color: var(--color-green, #2eb45a) !important;
+  border-color: var(--color-green, #2eb45a) !important;
+}
+
+li.task-list-item[data-task="-"],
+.markdown-source-view .HyperMD-task-line[data-task="-"],
+.markdown-source-view .HyperMD-task-line[data-task="-"] .cm-strikethrough {
+  text-decoration: line-through !important;
+  color: var(--text-muted) !important;
+  background-color: transparent !important;
+}
+
+/* A nested list has its own statuses, not its parent's green background. */
+li.task-list-item:is([data-task="x"], [data-task="X"], [data-task="/"], [data-task=">"]) > :is(ul, ol) {
+  background-color: var(--background-primary);
+}
+
+/* In-progress and deferred tasks are not struck through. */
+li.task-list-item[data-task="/"],
+.markdown-source-view .HyperMD-task-line[data-task="/"] {
+  background-color: rgba(230, 175, 30, 0.18) !important;
+}
+
+li.task-list-item[data-task=">"],
+.markdown-source-view .HyperMD-task-line[data-task=">"] {
+  background-color: rgba(65, 145, 230, 0.16) !important;
+}
+
+:is(li.task-list-item, .HyperMD-task-line):is([data-task="/"], [data-task=">"]),
+.HyperMD-task-line:is([data-task="/"], [data-task=">"]) .cm-strikethrough {
+  text-decoration: none !important;
+  color: var(--text-normal) !important;
+  border-radius: 4px;
+}
+
+:is(.task-list-item, .HyperMD-task-line)[data-task="/"] > input[type="checkbox"],
+input[type="checkbox"][data-task="/"] {
+  --local-task-color: var(--color-yellow, #d6a01b);
+  --local-task-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='5' fill='none' stroke='black' stroke-width='1.6'/%3E%3Cpath d='M8 4.5V8l2 1.5' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+:is(.task-list-item, .HyperMD-task-line)[data-task=">"] > input[type="checkbox"],
+input[type="checkbox"][data-task=">"] {
+  --local-task-color: var(--color-blue, #4191e6);
+  --local-task-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8h10M8 3l5 5-5 5' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+:is(.task-list-item, .HyperMD-task-line):is([data-task="/"], [data-task=">"]) > input[type="checkbox"],
+input[type="checkbox"]:is([data-task="/"], [data-task=">"]) {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  position: relative;
+  border-color: var(--local-task-color) !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+:is(.task-list-item, .HyperMD-task-line):is([data-task="/"], [data-task=">"]) > input[type="checkbox"]::after,
+input[type="checkbox"]:is([data-task="/"], [data-task=">"])::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  transform: none !important;
+  background-color: var(--local-task-color) !important;
+  -webkit-mask: var(--local-task-icon) center / contain no-repeat !important;
+  mask: var(--local-task-icon) center / contain no-repeat !important;
+}
+
+:is(
+  .task-list-item[data-task="-"] > input[type="checkbox"],
+  .HyperMD-task-line[data-task="-"] input[type="checkbox"],
+  input[type="checkbox"][data-task="-"]
+) {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  position: relative;
+  border-color: var(--color-red, #e05252) !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+:is(
+  .task-list-item[data-task="-"] > input[type="checkbox"],
+  .HyperMD-task-line[data-task="-"] input[type="checkbox"],
+  input[type="checkbox"][data-task="-"]
+)::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  transform: none !important;
+  background-color: var(--color-red, #e05252) !important;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 4l8 8M12 4l-8 8' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat !important;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 4l8 8M12 4l-8 8' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat !important;
+}
