@@ -1,37 +1,40 @@
-/* Task Click Status: done (green), in progress (yellow), deferred (blue), cancelled (red cross). */
+/* Task Click Status: done (green), in progress (yellow), deferred (blue), cancelled (red cross).
+   Selectors repeat an attribute (e.g. [data-task="x"][data-task="x"]) to win the cascade
+   through specificity instead of !important - it matches the exact same elements, just
+   counted as a higher-specificity selector by the CSS cascade. */
 body {
   --checklist-done-decoration: none;
   --checklist-done-color: var(--text-normal);
 }
 
-:is(.markdown-preview-view, .markdown-rendered) li.task-list-item[data-task="x"],
-:is(.markdown-preview-view, .markdown-rendered) li.task-list-item[data-task="X"],
-.markdown-source-view .HyperMD-task-line:is([data-task="x"], [data-task="X"]) {
-  background-color: rgba(46, 180, 90, 0.18) !important;
+:is(.markdown-preview-view, .markdown-rendered) li.task-list-item[data-task="x"][data-task="x"],
+:is(.markdown-preview-view, .markdown-rendered) li.task-list-item[data-task="X"][data-task="X"],
+.markdown-source-view .HyperMD-task-line:is([data-task="x"][data-task="x"], [data-task="X"][data-task="X"]) {
+  background-color: rgba(46, 180, 90, 0.18);
   border-radius: 4px;
-  text-decoration: none !important;
-  color: var(--text-normal) !important;
+  text-decoration: none;
+  color: var(--text-normal);
 }
 
-.markdown-source-view .HyperMD-task-line:is([data-task="x"], [data-task="X"]) .cm-strikethrough,
-li.task-list-item:is([data-task="x"], [data-task="X"]) > .task-list-item-text {
-  text-decoration: none !important;
-  color: var(--text-normal) !important;
+.markdown-source-view .HyperMD-task-line:is([data-task="x"][data-task="x"], [data-task="X"][data-task="X"]) .cm-strikethrough,
+li.task-list-item:is([data-task="x"][data-task="x"], [data-task="X"][data-task="X"]) > .task-list-item-text {
+  text-decoration: none;
+  color: var(--text-normal);
 }
 
-:is(.task-list-item[data-task="x"], .task-list-item[data-task="X"],
-    .HyperMD-task-line[data-task="x"], .HyperMD-task-line[data-task="X"]) > input[type="checkbox"],
-input[type="checkbox"]:is([data-task="x"], [data-task="X"]) {
-  background-color: var(--color-green, #2eb45a) !important;
-  border-color: var(--color-green, #2eb45a) !important;
+:is(.task-list-item[data-task="x"][data-task="x"], .task-list-item[data-task="X"][data-task="X"],
+    .HyperMD-task-line[data-task="x"][data-task="x"], .HyperMD-task-line[data-task="X"][data-task="X"]) > input[type="checkbox"],
+input[type="checkbox"]:is([data-task="x"][data-task="x"], [data-task="X"][data-task="X"]) {
+  background-color: var(--color-green, #2eb45a);
+  border-color: var(--color-green, #2eb45a);
 }
 
-li.task-list-item[data-task="-"],
-.markdown-source-view .HyperMD-task-line[data-task="-"],
-.markdown-source-view .HyperMD-task-line[data-task="-"] .cm-strikethrough {
-  text-decoration: line-through !important;
-  color: var(--text-muted) !important;
-  background-color: transparent !important;
+li.task-list-item[data-task="-"][data-task="-"],
+.markdown-source-view .HyperMD-task-line[data-task="-"][data-task="-"],
+.markdown-source-view .HyperMD-task-line[data-task="-"][data-task="-"] .cm-strikethrough {
+  text-decoration: line-through;
+  color: var(--text-muted);
+  background-color: transparent;
 }
 
 /* A nested list has its own statuses, not its parent's green background. */
@@ -40,20 +43,20 @@ li.task-list-item:is([data-task="x"], [data-task="X"], [data-task="/"], [data-ta
 }
 
 /* In-progress and deferred tasks are not struck through. */
-li.task-list-item[data-task="/"],
-.markdown-source-view .HyperMD-task-line[data-task="/"] {
-  background-color: rgba(230, 175, 30, 0.18) !important;
+li.task-list-item[data-task="/"][data-task="/"],
+.markdown-source-view .HyperMD-task-line[data-task="/"][data-task="/"] {
+  background-color: rgba(230, 175, 30, 0.18);
 }
 
-li.task-list-item[data-task=">"],
-.markdown-source-view .HyperMD-task-line[data-task=">"] {
-  background-color: rgba(65, 145, 230, 0.16) !important;
+li.task-list-item[data-task=">"][data-task=">"],
+.markdown-source-view .HyperMD-task-line[data-task=">"][data-task=">"] {
+  background-color: rgba(65, 145, 230, 0.16);
 }
 
-:is(li.task-list-item, .HyperMD-task-line):is([data-task="/"], [data-task=">"]),
-.HyperMD-task-line:is([data-task="/"], [data-task=">"]) .cm-strikethrough {
-  text-decoration: none !important;
-  color: var(--text-normal) !important;
+:is(li.task-list-item, .HyperMD-task-line):is([data-task="/"][data-task="/"], [data-task=">"][data-task=">"]),
+.HyperMD-task-line:is([data-task="/"][data-task="/"], [data-task=">"][data-task=">"]) .cm-strikethrough {
+  text-decoration: none;
+  color: var(--text-normal);
   border-radius: 4px;
 }
 
@@ -69,56 +72,56 @@ input[type="checkbox"][data-task=">"] {
   --local-task-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8h10M8 3l5 5-5 5' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
-:is(.task-list-item, .HyperMD-task-line):is([data-task="/"], [data-task=">"]) > input[type="checkbox"],
-input[type="checkbox"]:is([data-task="/"], [data-task=">"]) {
-  appearance: none !important;
-  -webkit-appearance: none !important;
+:is(.task-list-item, .HyperMD-task-line):is([data-task="/"][data-task="/"], [data-task=">"][data-task=">"]) > input[type="checkbox"],
+input[type="checkbox"]:is([data-task="/"][data-task="/"], [data-task=">"][data-task=">"]) {
+  appearance: none;
+  -webkit-appearance: none;
   position: relative;
-  border-color: var(--local-task-color) !important;
-  background-color: transparent !important;
-  background-image: none !important;
+  border-color: var(--local-task-color);
+  background-color: transparent;
+  background-image: none;
 }
 
-:is(.task-list-item, .HyperMD-task-line):is([data-task="/"], [data-task=">"]) > input[type="checkbox"]::after,
-input[type="checkbox"]:is([data-task="/"], [data-task=">"])::after {
-  content: "" !important;
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  margin: 0 !important;
-  transform: none !important;
-  background-color: var(--local-task-color) !important;
-  -webkit-mask: var(--local-task-icon) center / contain no-repeat !important;
-  mask: var(--local-task-icon) center / contain no-repeat !important;
+:is(.task-list-item, .HyperMD-task-line):is([data-task="/"][data-task="/"], [data-task=">"][data-task=">"]) > input[type="checkbox"]::after,
+input[type="checkbox"]:is([data-task="/"][data-task="/"], [data-task=">"][data-task=">"])::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  transform: none;
+  background-color: var(--local-task-color);
+  -webkit-mask: var(--local-task-icon) center / contain no-repeat;
+  mask: var(--local-task-icon) center / contain no-repeat;
 }
 
 :is(
-  .task-list-item[data-task="-"] > input[type="checkbox"],
-  .HyperMD-task-line[data-task="-"] input[type="checkbox"],
-  input[type="checkbox"][data-task="-"]
+  .task-list-item[data-task="-"][data-task="-"] > input[type="checkbox"],
+  .HyperMD-task-line[data-task="-"][data-task="-"] input[type="checkbox"],
+  input[type="checkbox"][data-task="-"][data-task="-"]
 ) {
-  appearance: none !important;
-  -webkit-appearance: none !important;
+  appearance: none;
+  -webkit-appearance: none;
   position: relative;
-  border-color: var(--color-red, #e05252) !important;
-  background-color: transparent !important;
-  background-image: none !important;
+  border-color: var(--color-red, #e05252);
+  background-color: transparent;
+  background-image: none;
 }
 
 :is(
-  .task-list-item[data-task="-"] > input[type="checkbox"],
-  .HyperMD-task-line[data-task="-"] input[type="checkbox"],
-  input[type="checkbox"][data-task="-"]
+  .task-list-item[data-task="-"][data-task="-"] > input[type="checkbox"],
+  .HyperMD-task-line[data-task="-"][data-task="-"] input[type="checkbox"],
+  input[type="checkbox"][data-task="-"][data-task="-"]
 )::after {
-  content: "" !important;
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  margin: 0 !important;
-  transform: none !important;
-  background-color: var(--color-red, #e05252) !important;
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 4l8 8M12 4l-8 8' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat !important;
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 4l8 8M12 4l-8 8' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat !important;
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  transform: none;
+  background-color: var(--color-red, #e05252);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 4l8 8M12 4l-8 8' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 4l8 8M12 4l-8 8' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
 }
